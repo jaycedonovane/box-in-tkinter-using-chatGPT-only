@@ -1,0 +1,57 @@
+import tkinter as tk
+import random
+import string
+import tkinter.messagebox
+
+window = tk.Tk()
+frame = tk.Frame(window)
+frame.pack()
+button1 = tk.Button(frame, text="Change background color", command=lambda: change_background_color())
+button2 = tk.Button(frame, text="Add another button", command=lambda: add_button())
+button3 = tk.Button(frame, text="Change window size", command=lambda: change_window_size())
+button4 = tk.Button(frame, text="Show random sentence", command=lambda: show_random_sentence())
+button5 = tk.Button(frame, text="Change button text", command=lambda: change_button_text())
+button6 = tk.Button(frame, text="Close the app", command=lambda: close_app())
+button1.pack(side="top", pady=10)
+button2.pack(side="top", pady=10)
+button3.pack(side="top", pady=10)
+button4.pack(side="top", pady=10)
+button5.pack(side="top", pady=10)
+button6.pack(side="top", pady=10)
+sentences = [
+  "The art of war is vital to the state.",
+  "It is a matter of life and death.",
+  "The art of war has five factors.",
+  "These are: (1) The Moral Law; (2) Heaven; (3) Earth; (4) The Commander; (5) Method and discipline."
+]
+
+def change_background_color():
+  color = "#{:06x}".format(random.randint(0, 0xFFFFFF))
+  window.config(bg=color)
+
+def add_button():
+  new_button = tk.Button(frame, text="New button")
+  new_button.pack(side="top", pady=10)
+
+def change_window_size():
+  current_width = window.winfo_width()
+  current_height = window.winfo_height()
+  new_width = current_width + 50
+  new_height = current_height + 50
+  window.geometry(f"{new_width}x{new_height}")
+
+def show_random_sentence():
+  sentence = random.choice(sentences)
+  tkinter.messagebox.showinfo("Random sentence", sentence)
+
+
+def change_button_text():
+  button = random.choice([button1, button2, button3, button4, button5, button6])
+  button.config(text=''.join(random.choices(string.ascii_letters + string.digits, k=10)))
+
+def close_app():
+  window.destroy()
+
+window.mainloop()
+
+
